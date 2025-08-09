@@ -34,7 +34,7 @@ P.S. 该项目主要面向本人需求制作，其余需求可在本项目基础
     dotnet run --project VRTDoubao.UI/VRTDoubao.UI.csproj
     ```
     
-    ![image-20250809172902945](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809172902945.png)
+    ![image-20250809172902945](D:\Workspace\VRT-Doubao\assets\image-20250809172902945.png)
 
 
 3. 准备相关豆包窗口（需要下载豆包桌面版）
@@ -43,24 +43,24 @@ P.S. 该项目主要面向本人需求制作，其余需求可在本项目基础
 
    - 实时字幕窗口，建议点击展开字幕：
 
-     ![image-20250809173005846](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809173005846.png)
+     ![image-20250809173005846](D:\Workspace\VRT-Doubao\assets\image-20250809173005846.png)
 
-     ![image-20250809173120690](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809173120690.png)
+     ![image-20250809173120690](D:\Workspace\VRT-Doubao\assets\image-20250809173120690.png)
 
    - 豆包浏览器窗口：
 
-     ![image-20250809173621449](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809173621449.png)
+     ![image-20250809173621449](D:\Workspace\VRT-Doubao\assets\image-20250809173621449.png)
 
 4. 将实时字幕与豆包浏览器分别放入左右窗口
 
    - 获得窗口句柄：点击拾取句柄（左）-> 点击弹窗确认 -> 两秒内将鼠标移动到实时字幕窗口上 -> 输入框出现句柄 -> 嵌入左窗口。
    - 同样方式将豆包浏览器放入右窗口。
 
-   ![image-20250809174145620](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809174145620.png)
+   ![image-20250809174145620](D:\Workspace\VRT-Doubao\assets\image-20250809174145620.png)
 
    将右窗口的两个圆片分别放置到麦克风与发送位置。
 
-   ![image-20250809174317044](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809174317044.png)
+   ![image-20250809174317044](D:\Workspace\VRT-Doubao\assets\image-20250809174317044.png)
 
    测试以下功能：
 
@@ -69,7 +69,19 @@ P.S. 该项目主要面向本人需求制作，其余需求可在本项目基础
 
 ## 使用演示
 
-使用steamvr进行游玩时，可将应用窗口放置在手腕上，可通过该方法实现在游戏中显示该窗口。
+使用SteamVR进行游玩时，可将应用窗口放置在手腕上，可通过该方法实现在游戏中显示该窗口。
+
+SteamVR中点击加号添加应用。
+
+![image-20250809184344128](D:\Workspace\VRT-Doubao\assets\image-20250809184344128.png)
+
+将窗口停靠在手腕
+
+![image-20250809184432173](D:\Workspace\VRT-Doubao\assets\image-20250809184432173.png)
+
+使用演示
+
+![image-20250809184516978](D:\Workspace\VRT-Doubao\assets\image-20250809184516978.png)
 
 
 
@@ -77,3 +89,4 @@ P.S. 该项目主要面向本人需求制作，其余需求可在本项目基础
 
 - 当实时字幕窗口高度改变导致应用内显示内容缺失时，可再次点击嵌入窗口完成刷新。
 - 有时会出现扬声器有音频但是字幕始终无显示，此时电脑上关闭实时翻译窗口后再次打开即可。
+- 停在控制器上后会和模型呼出的控制面板重合导致看不到，可以换手打开控制面板。
