@@ -1,0 +1,106 @@
+<Window x:Class="VRTDoubao.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        Title="VRT Doubao" Height="900" Width="1600" ResizeMode="CanResize" MinWidth="1200" MinHeight="720"
+        Icon="Assets/VRT-Doubao.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- 左侧：顶部横向控制条 + 下方镜像区 -->
+        <Grid Grid.Column="0" Margin="8,8,4,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- 顶部：左侧竖向板块（仅窗口句柄相关） -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,8">
+                    <!-- 窗口句柄 -->
+                    <TextBlock Text="窗口句柄" FontWeight="Bold" FontSize="18"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="左HWND:" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBox x:Name="TbLeftHwnd" Width="200" Height="40" Margin="6,0,6,0" FontSize="16" VerticalContentAlignment="Center"/>
+                        <Button x:Name="BtnPickLeft" Content="拾取句柄（左）" Width="130" Height="40" FontSize="16" Click="BtnPickLeft_OnClick"/>
+                        <Button x:Name="BtnEmbedLeftHwnd" Content="嵌入左窗口" Width="140" Height="40" FontSize="16" Margin="6,0,0,0" Click="BtnEmbedLeftHwnd_OnClick"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,8">
+                        <TextBlock Text="右HWND:" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBox x:Name="TbRightHwnd" Width="200" Height="40" Margin="6,0,6,0" FontSize="16" VerticalContentAlignment="Center"/>
+                        <Button x:Name="BtnPickRight" Content="拾取句柄（右）" Width="130" Height="40" FontSize="16" Click="BtnPickRight_OnClick"/>
+                        <Button x:Name="BtnEmbedRightHwnd" Content="嵌入右窗口" Width="140" Height="40" FontSize="16" Margin="6,0,0,0" Click="BtnEmbedRightHwnd_OnClick"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+            <!-- 分割线 + 下方镜像区（左） -->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- 顶部分割线 -->
+                <Border Grid.Row="0" Height="1" Background="#33000000" Margin="0,0,0,6"/>
+                <!-- 实时字幕显示区（镜像） -->
+                <Grid Grid.Row="1">
+                    <wfi:WindowsFormsHost x:Name="HostLeft" Visibility="Collapsed">
+                        <wf:Panel x:Name="PanelLeft"/>
+                    </wfi:WindowsFormsHost>
+                    <TextBlock x:Name="PlaceholderLeft"
+                               Text="此处放置实时字幕"
+                               Foreground="#66000000"
+                               FontSize="16"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- 可拖动的列分隔条，用于调整左右页面占比 -->
+        <GridSplitter Grid.Column="0"
+                      Width="6"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Stretch"
+                      Background="#22000000"
+                      ShowsPreview="True"/>
+
+        <!-- 右侧：上方两个大按钮控制点击；下方嵌入区内放置可拖拽圆片（圆片为 WinForms 控件叠放在 PanelRight 上） -->
+        <Grid Grid.Column="1" Margin="4,8,8,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="12,0,0,0">
+                <Button x:Name="BtnMicAction" Content="模拟点击1" Width="100" Height="100" FontSize="20" FontWeight="Bold" Click="BtnMicAction_OnClick"/>
+                <Button x:Name="BtnSendAction" Content="模拟点击2" Width="100" Height="100" FontSize="20" FontWeight="Bold" Margin="12,0,0,0" Click="BtnSendAction_OnClick"/>
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- 顶部分割线，与左侧一致 -->
+                <Border Grid.Row="0" Height="1" Background="#33000000" Margin="0,0,0,6"/>
+                <Grid Grid.Row="1">
+                    <wfi:WindowsFormsHost x:Name="HostRight" Visibility="Collapsed">
+                        <wf:Panel x:Name="PanelRight"/>
+                    </wfi:WindowsFormsHost>
+                    <TextBlock x:Name="PlaceholderRight"
+                               Text="此处放置豆包浏览器"
+                               Foreground="#66000000"
+                               FontSize="16"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
+
+

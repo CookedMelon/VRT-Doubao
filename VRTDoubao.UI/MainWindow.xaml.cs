@@ -32,6 +32,8 @@ public partial class MainWindow : Window
         // 音频相关逻辑已移除
     }
 
+        // Help button removed per UI simplification request
+
     private void ResizeEmbeddedChildren()
     {
         if (_leftChild != nint.Zero && _leftThumb != nint.Zero)
@@ -58,10 +60,15 @@ public partial class MainWindow : Window
             System.Windows.MessageBox.Show("左侧 HWND 无效");
             return;
         }
+        // 先显示宿主并强制布局，避免第一次无法显示
+        HostLeft.Visibility = System.Windows.Visibility.Visible;
+        this.UpdateLayout();
+
         var hostHandle = GetTopLevelHwnd();
         WindowMirror.Unmirror(ref _leftThumb);
         if (WindowMirror.MirrorToHost(_leftChild, hostHandle, out _leftThumb))
         {
+            if (PlaceholderLeft != null) PlaceholderLeft.Visibility = System.Windows.Visibility.Collapsed;
             ResizeEmbeddedChildren();
         }
         else
@@ -78,6 +85,10 @@ public partial class MainWindow : Window
             System.Windows.MessageBox.Show("右侧 HWND 无效");
             return;
         }
+        // 先显示宿主并强制创建句柄
+        HostRight.Visibility = System.Windows.Visibility.Visible;
+        this.UpdateLayout();
+        PanelRight.CreateControl();
         var hostHandleRight = PanelRight.Handle;
         // Ensure right is interactive by embedding
         WindowMirror.Unmirror(ref _rightThumb);
@@ -87,6 +98,7 @@ public partial class MainWindow : Window
             _rightChild = nint.Zero;
             return;
         }
+        if (PlaceholderRight != null) PlaceholderRight.Visibility = System.Windows.Visibility.Collapsed;
         ResizeEmbeddedChildren();
         EnsureDotsCreated();
         BringDotsToFront();
@@ -180,17 +192,19 @@ public partial class MainWindow : Window
         return (x, y);
     }
 
-    private void EnsureDotsCreated()
+        private void EnsureDotsCreated()
     {
         if (_micDot == null)
         {
             _micDot = CreateDraggableDot("MicDot", System.Drawing.Color.MediumSeaGreen, new System.Drawing.Point(40, 40), 1);
             PanelRight.Controls.Add(_micDot);
+                if (!_micDot.IsHandleCreated) _micDot.CreateControl();
         }
         if (_sendDot == null)
         {
             _sendDot = CreateDraggableDot("SendDot", System.Drawing.Color.CornflowerBlue, new System.Drawing.Point(100, 40), 2);
             PanelRight.Controls.Add(_sendDot);
+                if (!_sendDot.IsHandleCreated) _sendDot.CreateControl();
         }
         BringDotsToFront();
         PanelRight.Resize -= PanelRight_Resize;
@@ -204,7 +218,7 @@ public partial class MainWindow : Window
         BringDotsToFront();
     }
 
-    private WF.Control CreateDraggableDot(string name, System.Drawing.Color color, System.Drawing.Point initial, int label)
+        private WF.Control CreateDraggableDot(string name, System.Drawing.Color color, System.Drawing.Point initial, int label)
     {
         var dot = new WF.Panel
         {
@@ -220,12 +234,14 @@ public partial class MainWindow : Window
         {
             if (dot.IsHandleCreated)
             {
-                var ex = GetWindowLong(dot.Handle, GWL_EXSTYLE);
-                SetWindowLong(dot.Handle, GWL_EXSTYLE, ex | WS_EX_LAYERED);
-                SetLayeredWindowAttributes(dot.Handle, 0, 160, LWA_ALPHA); // ~63% opacity
+                var exPtr = GetWindowLongPtr(dot.Handle, GWL_EXSTYLE);
+                var ex = (int)((long)exPtr & 0xFFFFFFFF);
+                SetWindowLongPtr(dot.Handle, GWL_EXSTYLE, (nint)(ex | WS_EX_LAYERED));
+                SetLayeredWindowAttributes(dot.Handle, 0, 128, LWA_ALPHA); // 50% opacity
             }
         }
         dot.HandleCreated += (_, __) => ApplyLayered();
+        if (!dot.IsHandleCreated) dot.CreateControl();
         ApplyLayered();
 
         dot.Paint += (_, pe) =>
@@ -283,10 +299,17 @@ public partial class MainWindow : Window
         }
         if (_micDot != null)
         {
+            // Re-apply layered style after z-order changes to avoid losing alpha on some systems
+            var exPtr = GetWindowLongPtr(_micDot.Handle, GWL_EXSTYLE);
+            SetWindowLongPtr(_micDot.Handle, GWL_EXSTYLE, (nint)(((long)exPtr) | WS_EX_LAYERED));
+            SetLayeredWindowAttributes(_micDot.Handle, 0, 128, LWA_ALPHA);
             SetWindowPos(_micDot.Handle, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
         }
         if (_sendDot != null)
         {
+            var exPtr = GetWindowLongPtr(_sendDot.Handle, GWL_EXSTYLE);
+            SetWindowLongPtr(_sendDot.Handle, GWL_EXSTYLE, (nint)(((long)exPtr) | WS_EX_LAYERED));
+            SetLayeredWindowAttributes(_sendDot.Handle, 0, 128, LWA_ALPHA);
             SetWindowPos(_sendDot.Handle, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
         }
     }
@@ -336,10 +359,11 @@ public partial class MainWindow : Window
     [DllImport("user32.dll", SetLastError = true)]
     private static extern bool SetWindowPos(nint hWnd, nint hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern int GetWindowLong(nint hWnd, int nIndex);
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern int SetWindowLong(nint hWnd, int nIndex, int dwNewLong);
+    // Use pointer variants for 64-bit correctness
+    [DllImport("user32.dll", EntryPoint = "GetWindowLongPtr", SetLastError = true)]
+    private static extern nint GetWindowLongPtr(nint hWnd, int nIndex);
+    [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr", SetLastError = true)]
+    private static extern nint SetWindowLongPtr(nint hWnd, int nIndex, nint dwNewLong);
     [DllImport("user32.dll", SetLastError = true)]
     private static extern bool SetLayeredWindowAttributes(nint hwnd, uint crKey, byte bAlpha, uint dwFlags);
 

@@ -1,0 +1,79 @@
+# VRT-Doubao
+
+## 概述
+
+一款基于豆包的VRChat游戏内翻译工具。
+
+功能简介：
+
+- 和外国人交谈时，可显示对方话语翻译内容。
+- 想要与外国人对话但不知道英文怎么表述，可借助豆包进行中译英。
+
+
+
+P.S. 该项目主要面向本人需求制作，其余需求可在本项目基础上自行扩展或提issue。
+
+**关键词： vrchat、 doubao、 translate**
+
+## 准备工作
+
+1. 安装.NET 8.0
+
+    https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0
+
+3. 下载并运行本工具
+
+    ```bash
+    git clone git@github.com:CookedMelon/VRT-Doubao.git
+    cd VRT-Doubao
+    
+    # 编译
+    dotnet build -c Release
+    
+    # 运行
+    dotnet run --project VRTDoubao.UI/VRTDoubao.UI.csproj
+    ```
+    
+    ![image-20250809172902945](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809172902945.png)
+
+
+3. 准备相关豆包窗口（需要下载豆包桌面版）
+
+   需要准备：豆包实时字幕窗口+豆包浏览器窗口
+
+   - 实时字幕窗口，建议点击展开字幕：
+
+     ![image-20250809173005846](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809173005846.png)
+
+     ![image-20250809173120690](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809173120690.png)
+
+   - 豆包浏览器窗口：
+
+     ![image-20250809173621449](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809173621449.png)
+
+4. 将实时字幕与豆包浏览器分别放入左右窗口
+
+   - 获得窗口句柄：点击拾取句柄（左）-> 点击弹窗确认 -> 两秒内将鼠标移动到实时字幕窗口上 -> 输入框出现句柄 -> 嵌入左窗口。
+   - 同样方式将豆包浏览器放入右窗口。
+
+   ![image-20250809174145620](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809174145620.png)
+
+   将右窗口的两个圆片分别放置到麦克风与发送位置。
+
+   ![image-20250809174317044](C:\Users\cc241\AppData\Roaming\Typora\typora-user-images\image-20250809174317044.png)
+
+   测试以下功能：
+
+   - 测试点击右窗口上方按钮可正常模拟点击圆片。
+   - 豆包浏览器使用麦克风是否正确，与游戏内麦克风相同（doubao://settings/content/microphone）。
+
+## 使用演示
+
+使用steamvr进行游玩时，可将应用窗口放置在手腕上，可通过该方法实现在游戏中显示该窗口。
+
+
+
+## 其他事项
+
+- 当实时字幕窗口高度改变导致应用内显示内容缺失时，可再次点击嵌入窗口完成刷新。
+- 有时会出现扬声器有音频但是字幕始终无显示，此时电脑上关闭实时翻译窗口后再次打开即可。

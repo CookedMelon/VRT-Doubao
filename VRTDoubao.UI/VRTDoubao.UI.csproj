@@ -6,9 +6,17 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Use solution-level icon file for the executable -->
+    <ApplicationIcon>..\resource\VRT-Doubao.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\VRTDoubao.Win32\VRTDoubao.Win32.csproj" />
+  </ItemGroup>
+  <!-- Link the icon into this project as a WPF Resource under Assets/ -->
+  <ItemGroup>
+    <Resource Include="..\resource\VRT-Doubao.ico">
+      <Link>Assets\VRT-Doubao.ico</Link>
+    </Resource>
   </ItemGroup>
 </Project>
 
