@@ -1,0 +1,87 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# JetBrains Rider / ReSharper
+.idea/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Build outputs (recursive)
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Common configuration and local-only files
+*.local.json
+*.local.settings.json
+
+# Debug/Release folders anywhere
+[Dd]ebug*/
+[Rr]elease*/
+[Xx]64/
+[Xx]86/
+
+# .NET / NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+.nuget/NuGet.Config.user
+
+# WPF/WinForms generated files (usually under obj/ but ignore just in case)
+*.g.cs
+*.g.i.cs
+*.baml
+*.g.resources
+
+# Test results & coverage
+[Tt]est[Rr]esults*/
+*.coverage
+*.coveragexml
+.coverage
+coverage*/
+BenchmarkDotNet.Artifacts/
+
+# Publishing / ClickOnce
+[Pp]ublishProfiles/*.pubxml.user
+**/AppPackages/
+**/PublishOutput/
+
+# Logs & caches
+*.log
+*.tlog
+*.ide/
+
+# Security-sensitive
+*.pfx
+*.p12
+*.snk
+
+# Crash dumps
+*.dmp
+
+# Windows Installer files
+*.msi
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+
+# Rider/VS lock files
+*.sln.iml

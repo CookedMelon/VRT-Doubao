@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VRTDoubao.UI", "VRTDoubao.UI\\VRTDoubao.UI.csproj", "{F4E64CFC-8A6B-4A7E-A3F9-7C9E5DDEF001}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VRTDoubao.Win32", "VRTDoubao.Win32\\VRTDoubao.Win32.csproj", "{AAB5F9C6-7EA7-4D88-BE39-49A32F5B5002}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VRTDoubao.Audio", "VRTDoubao.Audio\\VRTDoubao.Audio.csproj", "{B9E3E3E8-8F8C-4A6C-9F5E-7F0E5C5D1003}"
+EndProject
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+        {F4E64CFC-8A6B-4A7E-A3F9-7C9E5DDEF001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {F4E64CFC-8A6B-4A7E-A3F9-7C9E5DDEF001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {F4E64CFC-8A6B-4A7E-A3F9-7C9E5DDEF001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {F4E64CFC-8A6B-4A7E-A3F9-7C9E5DDEF001}.Release|Any CPU.Build.0 = Release|Any CPU
+        {AAB5F9C6-7EA7-4D88-BE39-49A32F5B5002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {AAB5F9C6-7EA7-4D88-BE39-49A32F5B5002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {AAB5F9C6-7EA7-4D88-BE39-49A32F5B5002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {AAB5F9C6-7EA7-4D88-BE39-49A32F5B5002}.Release|Any CPU.Build.0 = Release|Any CPU
+        {B9E3E3E8-8F8C-4A6C-9F5E-7F0E5C5D1003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {B9E3E3E8-8F8C-4A6C-9F5E-7F0E5C5D1003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {B9E3E3E8-8F8C-4A6C-9F5E-7F0E5C5D1003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {B9E3E3E8-8F8C-4A6C-9F5E-7F0E5C5D1003}.Release|Any CPU.Build.0 = Release|Any CPU
+    EndGlobalSection
+EndGlobal
+
+
